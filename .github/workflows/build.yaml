@@ -58,15 +58,21 @@ jobs:
 
         mv ./server/$serverPack buildOut/$serverPack
 
-    - name: Upload a Build Artifact
+    - name: Upload Artifact Client Pack
       uses: actions/upload-artifact@v4
       with:
         # Artifact name
-        name: Test
+        name: Client
         # A file, directory or wildcard pattern that describes what to upload
-        path: |
-          buildOut/client.zip
-          buildOut/server.zip
+        path: buildOut/client.zip
+        
+    - name: Upload Artifact Server Pack
+      uses: actions/upload-artifact@v4
+      with:
+        # Artifact name
+        name: Server
+        # A file, directory or wildcard pattern that describes what to upload
+        path: buildOut/server.zip
 
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@latest
