@@ -32,7 +32,6 @@ jobs:
       run: |
         chmod +x ./packwiz
         ./packwiz curseforge export -o buildOut/client.zip
-        ./packwiz serve
 
     # Run bootstrap to download server files
     - name: Bootstrap
@@ -47,7 +46,7 @@ jobs:
         serverPack="server.zip"
 
         cd server
-        java -jar packwiz-installer-bootstrap.jar -g -s server http://localhost:8080/pack.toml
+        java -jar packwiz-installer-bootstrap.jar -g -s server "https://raw.githubusercontent.com/Oganesson897/Test/refs/heads/master-ceu/pack.toml"
 
         zip -r $serverPack config
         zip -r $serverPack groovy
