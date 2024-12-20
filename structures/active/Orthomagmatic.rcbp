@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "biomes": "$WASTELAND",
+      "weight": 1.5
+    },
+    {
+      "biomes": "$MOUNTAIN",
+      "weight": 0.75
+    },
+    {
+      "biomes": "volcanic",
+      "weight": 1.5
+    },
+    {
+      "biomes": "",
+      "weight": 0.1
+    }
+  ],
+  "metadata": {
+    "title": "Orthomagmatic",
+    "description": [
+      ""
+    ]
+  }
+}

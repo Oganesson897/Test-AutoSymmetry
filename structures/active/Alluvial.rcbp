@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "biomes": "$SANDY"
+    },
+    {
+      "biomes": "$MESA"
+    },
+    {
+      "biomes": "$BEACH"
+    },
+    {
+      "biomes": "$RIVER",
+      "weight": 2.5
+    },
+    {
+      "biomes": "",
+      "weight": 0.1
+    }
+  ],
+  "metadata": {
+    "title": "Alluvial",
+    "description": [
+      ""
+    ]
+  }
+}
