@@ -46,7 +46,7 @@ jobs:
         serverPack="server.zip"
 
         cd server
-        java -jar packwiz-installer-bootstrap.jar -g -s server "https://raw.githubusercontent.com/Oganesson897/Test/refs/heads/master-ceu/pack.toml"
+        java -jar packwiz-installer-bootstrap.jar -g -s server "https://raw.githubusercontent.com/MCTian-mi/Supersymmetry/refs/heads/autosymmetry/pack.toml"
 
         zip -r $serverPack config
         zip -r $serverPack groovy
