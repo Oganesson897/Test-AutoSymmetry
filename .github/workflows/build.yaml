@@ -58,6 +58,16 @@ jobs:
 
         mv ./server/$serverPack buildOut/$serverPack
 
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        # Artifact name
+        name: Test
+        # A file, directory or wildcard pattern that describes what to upload
+        path: |
+          buildOut/client.zip
+          buildOut/server.zip
+
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@latest
       with:
@@ -68,5 +78,4 @@ jobs:
         files: |
           buildOut/client.zip
           buildOut/server.zip
-          buildOut/modlist.html
         
