@@ -37,53 +37,18 @@ jobs:
       run: |
         pip install requests
     - run: python build/download.py
-    - name: Download
+    - name: Generate modlist
       shell: bash
       run: |
-        serverPack="server.zip"
-          
-        cd build/server
-        java -jar packwiz-installer-bootstrap.jar -g -s server "https://raw.githubusercontent.com/Oganesson897/Supersymmetry/refs/heads/packwiz/pack.toml"
-          
-        zip -r $serverPack config
-        zip -r $serverPack groovy
-        zip -r $serverPack libraries
-        zip -r $serverPack mods
-        zip -r $serverPack structures
-          
-        zip -m $serverPack launch.sh
-        zip -m $serverPack forge-1.12.2-14.23.5.2860.jar
-        zip -m $serverPack LICENSE
-        zip -m $serverPack minecraft_server.1.12.2.jar
-          
-        cd ..
-          
-        mv ./server/$serverPack buildOut/$serverPack
-
-    - name: Upload Artifact Client Pack
-      uses: actions/upload-artifact@v4
-      with:
-        # Artifact name
-        name: Client
-        # A file, directory or wildcard pattern that describes what to upload
-        path: buildOut/client.zip
-        
-    - name: Upload Artifact Server Pack
-      uses: actions/upload-artifact@v4
-      with:
-        # Artifact name
-        name: Server
-        # A file, directory or wildcard pattern that describes what to upload
-        path: buildOut/server.zip
-
+          chmod +x ./packwiz
+          ./packwiz list > /buildOut/modlist
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@latest
       with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest"
-        prerelease: true
-        title: ${{ steps.vars.outputs.sha_short }}
-        files: |
-          buildOut/client.zip
-          buildOut/server.zip
-        
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: ${{ steps.vars.outputs.sha_short }}
+          files: |
+            buildOut/client.zip
+            buildOut/modlist
