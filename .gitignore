@@ -7,7 +7,7 @@ fonts/
 journeymap/
 logs/
 saves/
-build/buildOut/
+build/
 
 .curseclient
 usercache.json
@@ -18,6 +18,7 @@ instance.json
 *.log
 *.txt
 *.dll
+*.exe
 
 build/modlist.*
 config/InvTweaks.cfg
@@ -80,7 +81,7 @@ screenshots/
 
 backups/
 
-resourcepacks/
+# resourcepacks/
 
 local/
 

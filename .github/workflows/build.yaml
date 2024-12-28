@@ -11,62 +11,68 @@ jobs:
     name: "Pre Release"
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v3
     - name: Set up Python 3.9
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v2
       with:
         python-version: 3.9
     - name: Declare some variables
       id: vars
       shell: bash
       run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short $GITHUB_SHA)"
-    - name: Install requests
-      run: |
-          pip install requests
-    
-    # Export client curse pack & Start serve on localhost:8080
+        echo "::set-output name=sha_short::$(git rev-parse --short $GITHUB_SHA)"
     - name: Export Client Curse Pack
       shell: bash
       run: |
         chmod +x ./packwiz
-        ./packwiz curseforge export -o buildOut/client.zip
-
-    # Run bootstrap to download server files
+        ./packwiz curseforge export -o client.zip
+        mkdir -p ./buildOut/
+        mv ./client.zip ./buildOut/
     - name: Bootstrap
       uses: actions/setup-java@v4
       with:
         distribution: 'zulu'
         java-version: '8'
-    - run: python server/download.py
+    - name: Install requests
+      run: |
+        pip install requests
+    - run: python build/download.py
     - name: Download
       shell: bash
       run: |
         serverPack="server.zip"
-
-        cd server
-        java -jar packwiz-installer-bootstrap.jar -g -s server "https://raw.githubusercontent.com/MCTian-mi/Supersymmetry/refs/heads/autosymmetry/pack.toml"
-
+          
+        cd build/server
+        java -jar packwiz-installer-bootstrap.jar -g -s server "https://raw.githubusercontent.com/Oganesson897/Supersymmetry/refs/heads/packwiz/pack.toml"
+          
         zip -r $serverPack config
         zip -r $serverPack groovy
+        zip -r $serverPack libraries
         zip -r $serverPack mods
         zip -r $serverPack structures
+          
         zip -m $serverPack launch.sh
-
+        zip -m $serverPack forge-1.12.2-14.23.5.2860.jar
+        zip -m $serverPack LICENSE
+        zip -m $serverPack minecraft_server.1.12.2.jar
+          
         cd ..
-
+          
         mv ./server/$serverPack buildOut/$serverPack
-
+    - name: Generate modlist
+      shell: bash
+      run: |
+          chmod +x ./packwiz
+          ./packwiz list > /buildOut/modlist
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@latest
       with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest"
-        prerelease: true
-        title: ${{ steps.vars.outputs.sha_short }}
-        files: |
-          buildOut/client.zip
-          buildOut/server.zip
-          buildOut/modlist.html
-        
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: ${{ steps.vars.outputs.sha_short }}
+          files: |
+            buildOut/client.zip
+            buildOut/server.zip
+            buildOut/modlist
+
