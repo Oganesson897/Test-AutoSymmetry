@@ -36,12 +36,6 @@ jobs:
     - name: Install requests
       run: |
         pip install requests
-    - name: Generate modlist
-      shell: bash
-      run: |
-          touch buildOut/modlist
-          chmod +x ./packwiz
-          ./packwiz list > /buildOut/modlist
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@latest
       with:
@@ -51,4 +45,3 @@ jobs:
           title: ${{ steps.vars.outputs.sha_short }}
           files: |
             buildOut/client.zip
-            buildOut/modlist
