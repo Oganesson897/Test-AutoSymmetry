@@ -59,20 +59,31 @@ jobs:
         cd ..
           
         mv ./server/$serverPack buildOut/$serverPack
-    - name: Generate modlist
-      shell: bash
-      run: |
-          chmod +x ./packwiz
-          ./packwiz list > /buildOut/modlist
+
+    - name: Upload Artifact Client Pack
+      uses: actions/upload-artifact@v4
+      with:
+        # Artifact name
+        name: Client
+        # A file, directory or wildcard pattern that describes what to upload
+        path: buildOut/client.zip
+        
+    - name: Upload Artifact Server Pack
+      uses: actions/upload-artifact@v4
+      with:
+        # Artifact name
+        name: Server
+        # A file, directory or wildcard pattern that describes what to upload
+        path: buildOut/server.zip
+
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@latest
       with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: ${{ steps.vars.outputs.sha_short }}
-          files: |
-            buildOut/client.zip
-            buildOut/server.zip
-            buildOut/modlist
-
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
+        prerelease: true
+        title: ${{ steps.vars.outputs.sha_short }}
+        files: |
+          buildOut/client.zip
+          buildOut/server.zip
+        
