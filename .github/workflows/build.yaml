@@ -39,6 +39,7 @@ jobs:
     - name: Generate modlist
       shell: bash
       run: |
+          touch buildOut/modlist
           chmod +x ./packwiz
           ./packwiz list > /buildOut/modlist
     - name: Automatic Releases
