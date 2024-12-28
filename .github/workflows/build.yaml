@@ -36,7 +36,6 @@ jobs:
     - name: Install requests
       run: |
         pip install requests
-    - run: python build/download.py
     - name: Generate modlist
       shell: bash
       run: |
