@@ -43,7 +43,7 @@ jobs:
       shell: bash
       run: |
         serverPack="server.zip"
-        cp LICENSE build/server
+        cp LICENSE build/server/
           
         cd build/server
         java -jar packwiz-installer-bootstrap.jar ../../pack.toml
@@ -61,7 +61,7 @@ jobs:
           
         cd ..
           
-        mv ./server/$serverPack buildOut/$serverPack
+        mv build/server/$serverPack buildOut/$serverPack
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@latest
       with:
