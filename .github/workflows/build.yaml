@@ -59,9 +59,9 @@ jobs:
         zip -m $serverPack LICENSE
         zip -m $serverPack minecraft_server.1.12.2.jar
           
-        cd ..
+        cd ../..
           
-        mv $serverPack buildOut/$serverPack
+        mv build/server/$serverPack buildOut/$serverPack
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@latest
       with:
