@@ -43,6 +43,7 @@ jobs:
       shell: bash
       run: |
         serverPack="server.zip"
+        cp LICENSE build/server
           
         cd build/server
         java -jar packwiz-installer-bootstrap.jar ../../pack.toml
