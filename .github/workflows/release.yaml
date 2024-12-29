@@ -8,9 +8,9 @@ jobs:
     name: "Release"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python 3.9
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: 3.9
     - name: Declare some variables
@@ -59,12 +59,12 @@ jobs:
         cd ../..
 
         mv build/server/$serverPack buildOut/$serverPack
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@v4
       with:
-      node-version: '20.x'
+        node-version: 'latest'
     - run: npm install js-toml
     - id: get-version
-      uses: actions/github-script@v6
+      uses: actions/github-script@v7
       with:
             result-encoding: string
             script: |
