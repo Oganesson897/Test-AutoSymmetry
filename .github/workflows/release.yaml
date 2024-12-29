@@ -59,6 +59,10 @@ jobs:
         cd ../..
 
         mv build/server/$serverPack buildOut/$serverPack
+    - uses: actions/setup-node@v3
+      with:
+      node-version: '20.x'
+    - run: npm install js-toml
     - id: get-version
       uses: actions/github-script@v6
       with:
@@ -66,11 +70,12 @@ jobs:
             script: |
                 try {
                     const fs = require('fs')
-                    const jsonString = fs.readFileSync('./manifest.json')
-                    var apps = JSON.parse(jsonString)
+                    const toml = require('js-toml')
+                    const tomlString = fs.readFileSync('./pack.toml')
+                    var apps = toml.load(tomlString)
                     return apps.version
                 } catch(err) {
-                    core.error("Error while reading or parsing the JSON")
+                    core.error("Error while reading or parsing the TOML")
                     core.setFailed(err)
                 }
     - run: echo "${{steps.get-version.outputs.result}}"
