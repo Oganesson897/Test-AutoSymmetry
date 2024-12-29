@@ -61,7 +61,7 @@ jobs:
           
         cd ..
           
-        mv build/server/$serverPack buildOut/$serverPack
+        mv $serverPack buildOut/$serverPack
     - name: Automatic Releases
       uses: marvinpinto/action-automatic-releases@latest
       with:
