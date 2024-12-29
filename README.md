@@ -15,7 +15,7 @@
 </blockquote>
 
 # Supersymmetry
-Supersymmetry is a complex tech-centered modpack based around GregTech that integrates chemical and physical processes from reality into its progression. This means having many different crafting chains that imitate manufacturing processes used in real life. 
+Supersymmetry is a complex tech-centered modpack based around GregTech that integrates chemical and physical processes from reality into its progression. This means having many different crafting chains that imitate manufacturing processes used in real life.
 
 Much of it is in-development, with PvE elements such as environmental factors and raids of enemy factions being planned. We intend to have our own [space-faring mod](https://github.com/SymmetricDevs/GregicalityStarbound) as well.
 
